@@ -9,55 +9,53 @@ namespace Project1Product
 {
     class Program
     {
+        static Dictionary<int,Product> Prodicts=new Dictionary<int,Product>();
+    
+        static List<Product> m2 = new List<Product>();
+        static string inputFilePath = "C:\\MySampleIO\\Product.txt";
         static void Main(string[] args)
         {
-            string inputFilePath = "C:\\Users\\Nowsath\\eclipse-workspace\\ProjectFirst\\src\\resource\\Product.txt";
+            Loaddata(inputFilePath);
+            Product p1=Prodicts[1];
 
-            //to Create folder
-            //string path = "C:\\MySampleInput";
-            //CreateDirectory(path);
-
-            Console.WriteLine("Read all lines as an array and access array elements");
-            string[] myFile = File.ReadAllLines(inputFilePath);
-            string hir = myFile[0];
-            string[] array_1 = null;
-
-            char[] split_character = { '|' };
-
-            array_1 = hir.Split(split_character);
-
-            Console.WriteLine(array_1[2]);
-
-            Product det = new Product();
-            det.Id = Convert.ToInt32(array_1[0]);
-            det.Name = array_1[1];
-            det.Category = array_1[2];
-            det.Unitprice = Convert.ToDouble(array_1[3]);
-            det.Taxprecent = Convert.ToDouble(array_1[4]);
-            det.Status = array_1[5];
-            // Create dictonary 
-            Dictionary<int, Product> md = new Dictionary<int, Product>();
-            md.Add(104, det);
-
-            foreach (KeyValuePair<int,Product>  x in md)
-            {
-                //Console.WriteLine(x.Key);
-                Product p1 = x.Value;
-                Console.WriteLine(p1.Id);
-                Console.WriteLine(p1.Name);
-                Console.WriteLine(p1.Category);
-                Console.WriteLine(p1.Unitprice);
-                Console.WriteLine(p1.Taxprecent);
-                Console.WriteLine(p1.Status);
-            }
+            //2ndQues 
+            Console.WriteLine(p1.Name);
+            //3rdQues 
+            Console.WriteLine(p1.Id);
+            //4thQues
+            AddList(inputFilePath);
             
-
-
 
         }
         private static void CreateDirectory(string path)
         {
             Directory.CreateDirectory(path);
+        }
+        public static void Loaddata(string inputFilePath)
+        {
+            string[] Products = File.ReadAllLines(inputFilePath);
+            foreach(string Prod in Products)
+            {
+                string[] myprod =Prod.Split('|');
+                Product p = new Product(Convert.ToInt32(myprod[0]), myprod[1], myprod[2], double.Parse(myprod[3]), (Taxprecent)Enum.Parse(typeof(Taxprecent), myprod[4]), (Status)Enum.Parse(typeof(Status), myprod[5]));
+                Prodicts.Add(Convert.ToInt32(myprod[0]), p);
+            }
+            
+
+        }
+        public static void AddList(string inputFilePath)
+        {
+            string[] ml = File.ReadAllLines(inputFilePath);
+            foreach (string Prod in ml)
+            {
+                string[] myprod = Prod.Split('|');
+                Product p = new Product(Convert.ToInt32(myprod[0]), myprod[1], myprod[2], double.Parse(myprod[3]), (Taxprecent)Enum.Parse(typeof(Taxprecent), myprod[4]), (Status)Enum.Parse(typeof(Status), myprod[5]));
+                m2.Add(p);
+            }
+            foreach (Product l in m2)
+            {
+                Console.WriteLine(l);
+            }
         }
         
     }

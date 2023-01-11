@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Project1Product
 {
-    class Product
+    public class Product
     {
         int _id;
 
@@ -15,6 +15,7 @@ namespace Project1Product
             get { return _id; }
             set { _id = value; }
         }
+
         string _name;
 
         public string Name
@@ -25,35 +26,35 @@ namespace Project1Product
 
         string _category;
 
-        public string Category
-        {
-            get { return _category; }
-            set { _category = value; }
-        }
-
         double _unitprice;
 
-        public double Unitprice
+        Taxprecent _taxprecent;
+
+        Status _Status;
+
+        public Product(int id, string name, string category, double unitprice, Taxprecent Taxprecent, Status status)
         {
-            get { return _unitprice; }
-            set { _unitprice = value; }
+            this._id = id;
+            this._name = name;
+            this._unitprice = unitprice;
+            this._taxprecent = Taxprecent;
+            this._category = category;
+            this._Status = status;  
+
         }
 
-        double _taxprecent;
-
-        public double Taxprecent
-        {
-            get { return _taxprecent; }
-            set { _taxprecent = value; }
-        }
-
-        string _Status;
-
-        public string Status
-        {
-            get { return _Status; }
-            set { _Status = value; }
-        }
-
+    }
+    public enum Taxprecent
+    {
+        No = 0,
+        Low = 5,
+        Mid = 12,
+        High = 18,
+        lux = 22,
+    }
+    public enum Status
+    {
+        Active = 0,
+        Disconnected = 1,
     }
 }
