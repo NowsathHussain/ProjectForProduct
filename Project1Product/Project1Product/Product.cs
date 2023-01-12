@@ -42,7 +42,10 @@ namespace Project1Product
             this._Status = status;  
 
         }
-
+        public override string ToString()
+        {
+            return string.Format("{0},{1},{2},{3},{4},{5}",this._id,this._name,this._unitprice,this._taxprecent,this._category,this._Status);
+        }
     }
     public enum Taxprecent
     {
@@ -57,4 +60,6 @@ namespace Project1Product
         Active = 0,
         Disconnected = 1,
     }
+    
+
 }

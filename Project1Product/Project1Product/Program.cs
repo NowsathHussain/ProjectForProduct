@@ -9,24 +9,37 @@ namespace Project1Product
 {
     class Program
     {
-        static Dictionary<int,Product> Prodicts=new Dictionary<int,Product>();
-    
+        static Dictionary<int,Product> Prodicts=new Dictionary<int,Product>();   
         static List<Product> m2 = new List<Product>();
         static string inputFilePath = "C:\\MySampleIO\\Product.txt";
         static void Main(string[] args)
         {
-            Loaddata(inputFilePath);
-            Product p1=Prodicts[1];
+            //1stQues
+            //Loaddata(inputFilePath);
+            //Product p1=Prodicts[1];
 
-            //2ndQues 
-            Console.WriteLine(p1.Name);
-            //3rdQues 
-            Console.WriteLine(p1.Id);
-            //4thQues
-            AddList(inputFilePath);
+            //2ndQues complete 
+            //Console.WriteLine(p1.Name);
+
+            //3rdQues complete
+            //Console.WriteLine(p1.Id);
+
+            //4thQues complete
             
 
+            //5thQues 
+            string name = Getstring("Enter your name : ");
+            int Unitprice = Getinterger("Enter the product unitprice : ");
+            int taxprecentage = Getinterger("Enter the Tax precentage : ");
+            string Category = Getstring("What category ? ");
+            CreateProduct(inputFilePath, Unitprice, name, Category, taxprecentage);
+
+            //6thQues
+
+
+
         }
+        #region Functions
         private static void CreateDirectory(string path)
         {
             Directory.CreateDirectory(path);
@@ -40,23 +53,52 @@ namespace Project1Product
                 Product p = new Product(Convert.ToInt32(myprod[0]), myprod[1], myprod[2], double.Parse(myprod[3]), (Taxprecent)Enum.Parse(typeof(Taxprecent), myprod[4]), (Status)Enum.Parse(typeof(Status), myprod[5]));
                 Prodicts.Add(Convert.ToInt32(myprod[0]), p);
             }
-            
-
         }
         public static void AddList(string inputFilePath)
         {
             string[] ml = File.ReadAllLines(inputFilePath);
+            //File.AppendAllLines
             foreach (string Prod in ml)
             {
                 string[] myprod = Prod.Split('|');
                 Product p = new Product(Convert.ToInt32(myprod[0]), myprod[1], myprod[2], double.Parse(myprod[3]), (Taxprecent)Enum.Parse(typeof(Taxprecent), myprod[4]), (Status)Enum.Parse(typeof(Status), myprod[5]));
                 m2.Add(p);
             }
+        }
+        public static void CreateProduct(string inputFilePath, int Unitprice, string name, string Category, int taxprecentage)
+        {
+       
+            AddList(inputFilePath);
+            int temp = 0;
             foreach (Product l in m2)
             {
-                Console.WriteLine(l);
+                temp = l.Id;
             }
+            //Console.WriteLine(temp + 1);
+            
+            StreamWriter writter = new StreamWriter(inputFilePath,true);
+            writter.WriteLine( temp+1+"|"+name+"|"+Category+"|"+Unitprice+"|"+taxprecentage+"|"+"Active");
+            Console.WriteLine("Product added successfully");
+            writter.Close();
         }
-        
+
+
+        #endregion
+        #region methods
+        public static int Getinterger(string message)
+        {
+            Console.WriteLine(message);
+            int temp = int.Parse(Console.ReadLine());
+            return temp;
+        }
+        public static string Getstring(string message)
+        {
+            Console.WriteLine(message);
+            string temp = Console.ReadLine();
+            return temp;
+        }
+        #endregion
+
+
     }
 }
