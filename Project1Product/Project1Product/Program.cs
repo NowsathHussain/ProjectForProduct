@@ -25,16 +25,30 @@ namespace Project1Product
             //Console.WriteLine(p1.Id);
 
             //4thQues complete
-            
+            AddList(inputFilePath);
 
             //5thQues 
-            string name = Getstring("Enter your name : ");
-            int Unitprice = Getinterger("Enter the product unitprice : ");
-            int taxprecentage = Getinterger("Enter the Tax precentage : ");
-            string Category = Getstring("What category ? ");
-            CreateProduct(inputFilePath, Unitprice, name, Category, taxprecentage);
+            //string name = Getstring("Enter your name : ");
+            //int Unitprice = Getinterger("Enter the product unitprice : ");
+            //int taxprecentage = Getinterger("Enter the Tax precentage : ");
+            //string Category = Getstring("What category ? ");
+            //CreateProduct(inputFilePath, Unitprice, name, Category, taxprecentage);
 
             //6thQues
+
+            //7thQues
+
+            //8thQues
+            //Console.WriteLine("Name ,Status ");
+            //string Input = Getstring("Which items you want to see? ");
+            //ShowProduct(Input);
+
+            //9thQues
+            Console.WriteLine("Name ,Status ");
+            string Input = Getstring("Which items you want to see? ");
+            ShowProduct(Input);
+
+            //10thQues
 
 
 
@@ -66,21 +80,52 @@ namespace Project1Product
             }
         }
         public static void CreateProduct(string inputFilePath, int Unitprice, string name, string Category, int taxprecentage)
-        {
-       
+        {      
             AddList(inputFilePath);
             int temp = 0;
             foreach (Product l in m2)
             {
                 temp = l.Id;
             }
-            //Console.WriteLine(temp + 1);
-            
+            //Console.WriteLine(temp + 1);           
             StreamWriter writter = new StreamWriter(inputFilePath,true);
             writter.WriteLine( temp+1+"|"+name+"|"+Category+"|"+Unitprice+"|"+taxprecentage+"|"+"Active");
             Console.WriteLine("Product added successfully");
             writter.Close();
         }
+        public static void ShowProduct(string input)
+        {
+            if (input=="Name")
+            {
+                Console.WriteLine("Product name : ");
+               foreach (Product l in m2)
+                   {
+                     Console.WriteLine(l.Name);
+                   }
+            }
+            if (input == "Status")
+            {
+                
+                Console.WriteLine("Status name : ");
+                string status = Status.Active.ToString();
+                Status MyStatus = (Status)Enum.Parse(typeof(Status), "Disconnected");
+                Console.WriteLine(MyStatus);
+               
+                    foreach (Product l in m2)
+                    {
+                        if(l.Status==MyStatus)
+                        {
+                            Console.WriteLine(l.ToString());
+                        }
+                    }
+                
+                
+                
+            }
+
+            
+        }
+
 
 
         #endregion

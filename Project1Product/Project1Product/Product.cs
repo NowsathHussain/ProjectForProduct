@@ -32,6 +32,12 @@ namespace Project1Product
 
         Status _Status;
 
+        public Status Status
+        {
+            get { return _Status; }
+            set { _Status = value; }
+        }
+
         public Product(int id, string name, string category, double unitprice, Taxprecent Taxprecent, Status status)
         {
             this._id = id;
