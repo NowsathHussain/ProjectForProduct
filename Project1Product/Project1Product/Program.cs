@@ -15,9 +15,9 @@ namespace Project1Product
         static void Main(string[] args)
         {
             //1stQues
-            //Loaddata(inputFilePath);
-            //Product p1=Prodicts[1];
-
+            Loaddata(inputFilePath);
+            Product p1 = Prodicts[1];
+            Console.WriteLine(p1.Name);
             //2ndQues complete 
             //Console.WriteLine(p1.Name);
 
@@ -44,16 +44,22 @@ namespace Project1Product
             //ShowProduct(Input);
 
             //9thQues
-            Console.WriteLine("Name ,Status ");
-            string Input = Getstring("Which items you want to see? ");
-            ShowProduct(Input);
+            //Console.WriteLine("Name ,Status ");
+            //string Input = Getstring("Which items you want to see? ");
+            //ShowProduct(Input);
 
             //10thQues
-
+            //Console.WriteLine("Name ,Status ");
+            //string Input = Getstring("Which items you want to see? ");
+            //ShowProduct(Input);
 
 
         }
         #region Functions
+        public static void EditProduct(string inputFilePath)
+        {
+
+        }
         private static void CreateDirectory(string path)
         {
             Directory.CreateDirectory(path);
@@ -61,6 +67,7 @@ namespace Project1Product
         public static void Loaddata(string inputFilePath)
         {
             string[] Products = File.ReadAllLines(inputFilePath);
+            //Console.WriteLine(Products);
             foreach(string Prod in Products)
             {
                 string[] myprod =Prod.Split('|');
@@ -105,25 +112,34 @@ namespace Project1Product
             }
             if (input == "Status")
             {
-                
-                Console.WriteLine("Status name : ");
+                string Otherinput = Getstring("Enter Status category ");
+
                 string status = Status.Active.ToString();
                 Status MyStatus = (Status)Enum.Parse(typeof(Status), "Disconnected");
-                Console.WriteLine(MyStatus);
-               
+                Status AcStatus = (Status)Enum.Parse(typeof(Status), "Active");
+                if (Otherinput == "Disconnected")
+               {
+                   Console.WriteLine("Disconnected product list");
                     foreach (Product l in m2)
                     {
                         if(l.Status==MyStatus)
                         {
                             Console.WriteLine(l.ToString());
                         }
-                    }
-                
-                
-                
-            }
-
-            
+                    }   
+               }
+                else if(Otherinput=="Active")
+                {
+                    Console.WriteLine("Active product list");
+                    foreach(Product l in m2)
+                         {
+                                if(l.Status==AcStatus)
+                               {
+                                       Console.WriteLine(l.ToString());
+                               }
+                         }
+                }
+            }         
         }
 
 
